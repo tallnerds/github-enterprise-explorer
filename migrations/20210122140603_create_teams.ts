@@ -2,11 +2,10 @@ import * as Knex from 'knex';
 import { pk, timestamps } from './helpers';
 
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable(`repositories`, (table) => {
+  return knex.schema.createTable(`teams`, (table) => {
     pk(knex, table);
 
     table.string(`name`).notNullable();
-    table.string(`language`).notNullable();
 
     table
       .uuid(`organization_id`)
@@ -19,5 +18,5 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
-  return knex.schema.dropTable(`repositories`);
+  return knex.schema.dropTable(`teams`);
 }

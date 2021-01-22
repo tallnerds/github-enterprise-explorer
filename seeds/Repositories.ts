@@ -1,13 +1,15 @@
 import * as Knex from 'knex';
 import faker from 'faker';
-import { Repository } from '../src/models';
+import { Organization, Repository } from '../src/models';
 import { timestamps } from './helpers';
 
 export async function seed(knex: Knex): Promise<any> {
+  const orgs = await Organization.query();
+
   return Repository.query(knex).insert(
     Array.from({ length: 50 }, () => ({
-      // TODO: Wire to association to organization
-      organization_id: faker.random.number(),
+      // Attach to random org
+      organizationId: faker.random.arrayElement(orgs).id,
 
       name: `${faker.hacker.verb()}-${faker.vehicle.manufacturer()}`,
       language: faker.random.arrayElement([
@@ -18,6 +20,7 @@ export async function seed(knex: Knex): Promise<any> {
         `elixir`,
         `go`,
       ]),
+
       ...timestamps(),
     })),
   );
