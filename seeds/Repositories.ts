@@ -21,6 +21,9 @@ export async function seed(knex: Knex): Promise<any> {
         `go`,
       ]),
 
+      url: faker.internet.url(),
+      description: faker.lorem.paragraph(),
+
       ...timestamps(),
     })),
   );
