@@ -5,5 +5,5 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
-  return knex.raw(`DROP EXTENSION IF NOT EXISTS "uuid-ossp"`);
+  return knex.raw(`DROP EXTENSION IF EXISTS "uuid-ossp"`);
 }
